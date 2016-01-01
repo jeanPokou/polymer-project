@@ -1,0 +1,25 @@
+{
+  "name": "polymerProject",
+  "description": "polymer project",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.3"
+  },
+  "main": "",
+  "authors": [
+    "jeanpokou"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "polymer"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
