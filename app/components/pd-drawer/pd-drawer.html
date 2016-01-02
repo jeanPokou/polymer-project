@@ -1,0 +1,147 @@
+<dom-module id="pd-drawer">
+  <template>
+    <div id="drawer" class$="{{mainClasses}}">
+        <p> Drawer</p>
+    </div>
+
+
+  </template>
+</dom-module>
+
+<script>
+
+class pdDrawer {
+  beforeRegister(){
+    this.is = 'pdDrawer',
+    this.properties = {
+      drawerSidePosition:{
+            type:Object,
+            value:function () {
+                return {
+                  leftShow:true,
+                  rightShow:false
+                };
+            }
+          },
+
+          drawerPinPosition:{
+            type:Object,
+            value:function(){
+              return {
+                pinLeft:true,
+                pinRight:false
+              }
+            }
+          },
+          leftLocked:{
+            type: Boolean,
+            value:true
+          },
+          rightLocked:{
+            type: Boolean,
+            value:false
+
+          },
+          leftShow:{
+            type:Boolean,
+            value:true
+          },
+          rightShow:{
+            type: Boolean,
+            value:false
+          },
+          mainClasses:{
+            type:String,
+            computed:'_computeClass(leftShow,rightShow,leftLocked,rightLocked)'
+          }
+
+    }
+  }
+
+}
+Polymer(pdDrawer)
+  // Polymer({
+  //   is: 'pd-drawer',
+  //   properties:{
+  //
+  //     drawerSidePosition:{
+  //       type:Object,
+  //       value:function () {
+  //           return {
+  //             leftShow:true,
+  //             rightShow:false
+  //           };
+  //       }
+  //     },
+  //
+  //     drawerPinPosition:{
+  //       type:Object,
+  //       value:function(){
+  //         return {
+  //           pinLeft:true,
+  //           pinRight:false
+  //         }
+  //       }
+  //     },
+  //     leftLocked:{
+  //       type: Boolean,
+  //       value:true
+  //     },
+  //     rightLocked:{
+  //       type: Boolean,
+  //       value:false
+  //
+  //     },
+  //     leftShow:{
+  //       type:Boolean,
+  //       value:true
+  //     },
+  //     rightShow:{
+  //       type: Boolean,
+  //       value:false
+  //     },
+  //     mainClasses:{
+  //       type:String,
+  //       computed:'_computeClass(leftShow,rightShow,leftLocked,rightLocked)'
+  //     }
+  //
+  //
+  //   },
+  //   toggleSidePosition:function (pos) {
+  //       this.drawerSidePosition[pos]=!this.drawerSidePosition[pos];
+  //     if(pos === 'leftShow')
+  //     this.drawerSidePosition['rightShow']=!this.drawerSidePosition['rightShow'];
+  //     else {
+  //         this.drawerSidePosition['leftShow']=!this.drawerSidePosition['leftShow'];
+  //     }
+  //   },
+  //   togglePinPosition :function (pin) {
+  //     this.drawerPinPosition[pin]=!this.drawerPinPosition[pin];
+  //     if(pos === 'leftpin'){
+  //       this.drawerPinPosition['rightLocked']
+  //     }
+  //   },
+  //   _computeClass:function () {
+  //
+  //
+  //   },
+  //   toggleLeft:function () {
+  //     this.rightShow = false;
+  //     this.leftShow = !this.leftShow;
+  //   },
+  //   toggleRight:function () {
+  //     this.leftShow = false;
+  //     this.rightShow =! this.rightShow;
+  //   },
+  //   pinLeft:function () {
+  //     this.leftLocked=!this.rightLocked;
+  //     // this.closeDrawers();
+  //     // this.mobileModeCheck();
+  //   },
+  //   pinRight:function () {
+  //     this.rightLocked=!this.rightLocked;
+  //     // this.closeDrawers();
+  //     // this.mobileModeCheck();
+  //   }
+  // });
+</script>
