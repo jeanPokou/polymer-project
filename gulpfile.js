@@ -7,24 +7,26 @@ var browserSync = require('browser-sync').create();
 
 var paths = {
   toCopy: [
-    'app/bower_components',
-    'app/**/*.{js,html}'
+    'app/bower_components/**/*',
+    '!app/components/**/*'
 
   ],
   toTranspile: [
-    '!app/bower_components/**',
-    'app/components/**/*.{js,html}',
+    'app/components/**/*',
+    '!app/bower_components/**/*.{js,html}',
     'app/index.html'
   ]
 };
 gulp.task('js',function() {
-  return gulp.src(paths.toTranspile)
+  return gulp.src(paths.toTranspile,{'base': 'app'})
         .pipe($.size())
         .pipe($.sourcemaps.init())
-        .pipe($.if('*.html',$.crisper()))
+        .pipe($.if('*.html',$.crisper({scriptInHead: false})))
         .pipe($.if('*.js',$.babel({
           presets: ['es2015']
         })))
+         .pipe($.sourcemaps.write('.'))
+        .pipe(gulp.dest('.tmp/'))
         .pipe(gulp.dest('build'));
 
 });
@@ -36,7 +38,7 @@ gulp.task('clear', function() {
 });
 
 gulp.task('copy',function() {
-  return gulp.src(paths.toCopy)
+  return gulp.src(paths.toCopy,{'base': 'app'})
   .pipe(gulp.dest('build'));
 });
 
