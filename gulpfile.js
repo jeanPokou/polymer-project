@@ -50,17 +50,15 @@ gulp.task('start',function() {
 
 gulp.task('build', function(cb) {
   runSequence('clear',
-      ['copy','js','start'],cb);
+      ['copy','js'],cb);
 });
-gulp.task('serve', function(cb) {
-  runSequence('clear',
-      ['copy','js','start'],'browserSync',cb);
-});
-// Static server
-gulp.task('browserSync', function() {
+gulp.task('serve',['build'], function(cb) {
   browserSync.init({
+    port: 5001,
     server: {
       baseDir: './build'
+
     }
   });
 });
+gulp.watch('app/**/*',['build']);

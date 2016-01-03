@@ -1,10 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <dom-module id="pd-drawer">
   <template>
-    <div id="drawer" class$="{{mainClasses}}">
+    <div id="drawer" class$="{{positionClasse}}">
         <p> Drawer</p>
     </div>
-
 
   </template>
 
@@ -25,8 +24,10 @@
               type:Object,
               value:function () {
                   return {
-                    leftShow:true,
-                    rightShow:false
+                    leftSide:true,
+                    rightSide:false,
+                    topSide:false,
+                    bottomSide:false
                   };
               }
             },
@@ -35,34 +36,66 @@
               type:Object,
               value:function(){
                 return {
-                  pinLeft:true,
-                  pinRight:false
+                  leftPin:true,
+                  rightPin:false,
+                  topPin:false,
+                  bottomPin:false
                 }
               }
             },
-            leftLocked:{
-              type: Boolean,
-              value:true
-            },
-            rightLocked:{
-              type: Boolean,
-              value:false
 
-            },
-            leftShow:{
-              type:Boolean,
-              value:true
-            },
-            rightShow:{
-              type: Boolean,
-              value:false
-            },
-            mainClasses:{
-              type:String,
-            //  computed:'_computeClass(leftShow,rightShow,leftLocked,rightLocked)'
+            positionClasse:{
+              type:String
+
             }
 
       }
+      this.observers=[
+          '_computeClass(drawerPinPosition.*,drawerSidePosition.*)'
+        ]
+    }
+
+
+    _computeClass(){
+      var classe=[];
+        for(var item in this.drawerSidePosition){
+          if( this.drawerSidePosition[item]== true){
+            classe.push(item);
+          }
+        }
+
+        for(var item in this.drawerPinPosition){
+          if( this.drawerPinPosition[item]== true){
+            classe.push(item);
+          }
+        }
+        console.log(classe.join(' '));
+        this.positionClasse=classe.join(' ');
+    }
+
+    setDrawerSidePosition(pos) {
+
+      for( var item in this.drawerSidePosition){
+        if (item!== pos){
+            this.set('drawerSidePosition.'+ item ,false);
+        }
+        if (item == pos){
+            this.set('drawerSidePosition.'+ pos ,true);
+        }
+
+      }
+
+    }
+    setDrawerPinPosition(pos){
+    for( var item in this.drawerPinPosition){
+
+      if (item!== pos){
+        this.set('drawerPinPosition.'+ item ,false);
+      }
+      if(item == pos) {
+          this.set('drawerPinPosition.'+ pos ,true);
+      }
+    }
     }
 
   }
